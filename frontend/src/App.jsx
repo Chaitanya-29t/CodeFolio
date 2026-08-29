@@ -1,6 +1,55 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
+  const [form, setForm] = useState({
+  name: "",
+  email: "",
+  message: "",
+});
+
+const [status, setStatus] = useState("");
+
+const handleChange = (e) => {
+  setForm({
+    ...form,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setStatus("Sending...");
+
+  try {
+    const response = await fetch(
+      "https://codefolio-backend-3hhh.onrender.com/api/contact",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Something went wrong");
+    }
+
+    setStatus("Message sent successfully 🚀");
+
+    setForm({
+      name: "",
+      email: "",
+      message: "",
+    });
+  } catch (error) {
+    setStatus("Failed to send message. Please try again.");
+  }
+};
   const profile = {
     name: "Chaitanya Todase",
     username: "chaitanya",
@@ -122,14 +171,40 @@ function App() {
             Have a project or opportunity? I'd love to hear from you.
           </p>
 
-          <a
-  href="https://mail.google.com/mail/?view=cm&fs=1&to=chaitanyatodase78@gmail.com"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="primary-btn"
->
-  Send Me an Email
-</a>
+          <form onSubmit={handleSubmit} className="contact-form">
+  <input
+    type="text"
+    name="name"
+    placeholder="Your Name"
+    value={form.name}
+    onChange={handleChange}
+    required
+  />
+
+  <input
+    type="email"
+    name="email"
+    placeholder="Your Email"
+    value={form.email}
+    onChange={handleChange}
+    required
+  />
+
+  <textarea
+    name="message"
+    placeholder="Your Message"
+    value={form.message}
+    onChange={handleChange}
+    rows="5"
+    required
+  />
+
+  <button type="submit" className="primary-btn">
+    Send Message
+  </button>
+
+  {status && <p>{status}</p>}
+</form>
         </section>
       </main>
 
