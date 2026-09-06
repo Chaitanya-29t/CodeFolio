@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require("./routes/projectRoutes");
-const skillRoutes = require("./routes/skillRoutes");
+const skillRoutes = require("./routes/SkillRoutes");
 const habitRoutes = require("./routes/habitRoutes");
 
 const app = express();
