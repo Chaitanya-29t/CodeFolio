@@ -18,7 +18,7 @@ function PublicPortfolio() {
       try {
         // 1. Fetch profile
         const userResponse = await fetch(
-          `http://localhost:5000/api/users/${username}`
+          `https://codefolio-backend-chaitanya.onrender.com/api/users/${username}`
         );
 
         const userData = await userResponse.json();
@@ -34,7 +34,7 @@ function PublicPortfolio() {
         // 2. Fetch projects separately
         try {
           const projectsResponse = await fetch(
-            `http://localhost:5000/api/projects/${userId}`
+            `https://codefolio-backend-chaitanya.onrender.com/api/projects/${userId}`
           );
 
           const projectsData = await projectsResponse.json();
@@ -50,7 +50,7 @@ function PublicPortfolio() {
         // 3. Fetch skills separately
         try {
           const skillsResponse = await fetch(
-            `http://localhost:5000/api/skills/${userId}`
+            `https://codefolio-backend-chaitanya.onrender.com/api/skills/${userId}`
           );
 
           const skillsData = await skillsResponse.json();

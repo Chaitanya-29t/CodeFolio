@@ -67,9 +67,7 @@ function MinimalistTemplate({ data }) {
 
         {/* PHOTO LATER ADD KARENGE */}
         <div className="profile-card">
-          <div className="avatar">
-            {data.name?.charAt(0)}
-          </div>
+          <div className="avatar">{data.name?.charAt(0)}</div>
         </div>
       </section>
 
@@ -133,74 +131,79 @@ function MinimalistTemplate({ data }) {
 
       {/* CONTACT */}
       <section className="section contact-section" id="contact">
-  <h2>Contact</h2>
-  <p>Interested in working together? Feel free to get in touch.</p>
+        <h2>Contact</h2>
 
-  <form
-    className="contact-form"
-    onSubmit={async (e) => {
-      e.preventDefault();
+        <p>
+          Interested in working together? Feel free to get in touch.
+        </p>
 
-      const formData = new FormData(e.target);
+        <form
+          className="contact-form"
+          onSubmit={async (e) => {
+            e.preventDefault();
 
-      const contactData = {
-        name: formData.get("name"),
-        email: formData.get("email"),
-        message: formData.get("message"),
-      };
+            const formData = new FormData(e.target);
 
-      try {
-        const response = await fetch(
-          "http://localhost:5000/api/contact",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(contactData),
-          }
-        );
+            const contactData = {
+              name: formData.get("name"),
+              email: formData.get("email"),
+              message: formData.get("message"),
+            };
 
-        const data = await response.json();
+            try {
+              const response = await fetch(
+                "https://codefolio-backend-chaitanya.onrender.com/api/contact",
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify(contactData),
+                }
+              );
 
-        if (data.success) {
-          alert("Message sent successfully 🚀");
-          e.target.reset();
-        } else {
-          alert(data.message || "Failed to send message");
-        }
-      } catch (error) {
-        console.error("Contact error:", error);
-        alert("Something went wrong");
-      }
-    }}
-  >
-    <input
-      type="text"
-      name="name"
-      placeholder="Your Name"
-      required
-    />
+              const responseData = await response.json();
 
-    <input
-      type="email"
-      name="email"
-      placeholder="Your Email"
-      required
-    />
+              if (responseData.success) {
+                alert("Message sent successfully 🚀");
+                e.target.reset();
+              } else {
+                alert(
+                  responseData.message || "Failed to send message"
+                );
+              }
+            } catch (error) {
+              console.error("Contact error:", error);
+              alert("Something went wrong");
+            }
+          }}
+        >
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+          />
 
-    <textarea
-      name="message"
-      placeholder="Your Message"
-      rows="6"
-      required
-    ></textarea>
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+          />
 
-    <button type="submit" className="primary-btn">
-      Send Message
-    </button>
-  </form>
-</section>
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            rows="6"
+            required
+          ></textarea>
+
+          <button type="submit" className="primary-btn">
+            Send Message
+          </button>
+        </form>
+      </section>
 
       {/* FOOTER */}
       <footer>

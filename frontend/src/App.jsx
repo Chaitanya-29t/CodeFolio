@@ -15,7 +15,7 @@ import templateMap from "./templateMap";
 // API CONFIG
 // =========================
 
-const API = "http://localhost:5000";
+const API = "https://codefolio-backend-chaitanya.onrender.com";
 const USER_ID = "6a9bec2a4df9fceb5a32d435";
 
 // ======================================================
