@@ -3,6 +3,7 @@ const Project = require("../models/project");
 
 const router = express.Router();
 // Create project
+// Create project
 router.post("/", async (req, res) => {
   try {
     const project = await Project.create(req.body);
