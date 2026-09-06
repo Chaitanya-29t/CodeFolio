@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -15,9 +12,10 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "mongoose": "^9.9.4"
+    "mongoose": "^9.9.4",
+    "nodemailer": "^10.0.0"
   },
-  "script": {
+  "scripts": {
     "start": "node server.js"
   }
 }
