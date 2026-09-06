@@ -1305,9 +1305,9 @@ function DashboardLayout({ children }) {
             📩 Contact
           </NavLink>
 
-          <NavLink to="/chaitanya">
-            🌐 View Portfolio
-          </NavLink>
+          <NavLink to="/user/chaitanya">
+  🌐 View Portfolio
+</NavLink>
 
         </nav>
 
@@ -1338,7 +1338,7 @@ function App() {
         ========================= */}
 
         <Route
-          path="/:username"
+          path="/user/:username"
           element={<PublicPortfolio />}
         />
 
