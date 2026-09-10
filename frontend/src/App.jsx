@@ -109,7 +109,7 @@ function ProfilePage() {
     };
 
     fetchProfile();
-  }, [reset]);
+  }, []);
 
   // =========================
   // UPDATE PROFILE

@@ -110,6 +110,71 @@ function CyberpunkTemplate({ data }) {
           ))}
         </div>
       </section>
+      {/* Contact */}
+<section className="cyberpunk-section">
+  <h2>&gt; CONTACT</h2>
+
+  <div className="cyberpunk-contact">
+    <p>Want to work together?</p>
+
+    <form
+      onSubmit={async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+
+        const response = await fetch(
+  "http://localhost:5000/api/contact",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+    }),
+  }
+);
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert("Message sent successfully 🚀");
+          e.target.reset();
+        } else {
+          alert(result.message || "Failed to send message");
+        }
+      }}
+    >
+      <input
+        type="text"
+        name="name"
+        placeholder="Your Name"
+        required
+      />
+
+      <input
+        type="email"
+        name="email"
+        placeholder="Your Email"
+        required
+      />
+
+      <textarea
+        name="message"
+        placeholder="Your Message"
+        rows="5"
+        required
+      ></textarea>
+
+      <button type="submit">
+        &lt; SEND MESSAGE /&gt;
+      </button>
+    </form>
+  </div>
+</section>
 
       {/* Footer */}
       <footer className="cyberpunk-footer">
