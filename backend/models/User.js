@@ -45,6 +45,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    
+    customDomain: {
+  type: String,
+  default: "",
+},
 
     templateId: {
       type: String,
