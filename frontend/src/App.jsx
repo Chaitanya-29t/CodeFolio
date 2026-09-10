@@ -72,6 +72,7 @@ function ProfilePage() {
           linkedin: user.socialLinks?.linkedin || "",
           twitter: user.socialLinks?.twitter || "",
           resumeUrl: user.resumeUrl || "",
+          customDomain: user.customDomain || "",
           templateId: user.templateId || "minimalist",
         });
 
@@ -139,7 +140,8 @@ function ProfilePage() {
             },
 
             resumeUrl: formData.resumeUrl || "",
-            templateId: formData.templateId || "minimalist",
+customDomain: formData.customDomain || "",
+templateId: formData.templateId || "minimalist",
           }),
         }
       );
@@ -298,6 +300,16 @@ function ProfilePage() {
                   {...register("resumeUrl")}
                 />
               </div>
+              {/* CUSTOM DOMAIN */}
+<div>
+  <label>Custom Domain</label>
+
+  <input
+    type="text"
+    placeholder="yourname.com"
+    {...register("customDomain")}
+  />
+</div>
 
               {/* TEMPLATE */}
               <div>
@@ -367,10 +379,13 @@ function ProfilePage() {
                 },
 
                 resumeUrl:
-                  formValues.resumeUrl || "",
+  formValues.resumeUrl || "",
 
-                // Database projects
-                projects,
+customDomain:
+  formValues.customDomain || "",
+
+// Database projects
+projects,
 
                 // Database skills
                 skills,
