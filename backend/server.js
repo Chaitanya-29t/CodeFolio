@@ -1,16 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 require("dotenv").config();
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const userRoutes = require("./routes/userRoutes");
 const projectRoutes = require("./routes/projectRoutes");
@@ -63,19 +57,27 @@ app.post("/api/contact", async (req, res) => {
   }
 
   try {
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      replyTo: email,
-      subject: `New Contact Message from ${name}`,
-      text: `
+    const { data, error } = await resend.emails.send({
+  from: "onboarding@resend.dev",
+  to: process.env.EMAIL_USER,
+  replyTo: email,
+  subject: `New Contact Message from ${name}`,
+  text: `
 Name: ${name}
 Email: ${email}
 
 Message:
 ${message}
-      `,
-    });
+  `,
+});
+
+if (error) {
+  console.log("Resend email failed:", error);
+  return res.status(500).json({
+    success: false,
+    message: "Failed to send message",
+  });
+}
 
     res.json({
       success: true,

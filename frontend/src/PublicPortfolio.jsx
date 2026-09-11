@@ -28,6 +28,7 @@ function PublicPortfolio() {
         }
 
         setUser(userData.user);
+        
 
         const userId = userData.user._id;
 

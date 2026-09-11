@@ -1,5 +1,5 @@
 function CyberpunkTemplate({ data }) {
-  console.log("Custom Domain:", data.customDomain);
+  
   return (
     <div className="cyberpunk-template">
       {/* Header */}
