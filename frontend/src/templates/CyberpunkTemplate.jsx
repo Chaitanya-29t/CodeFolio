@@ -1,4 +1,5 @@
 function CyberpunkTemplate({ data }) {
+  console.log("Custom Domain:", data.customDomain);
   return (
     <div className="cyberpunk-template">
       {/* Header */}
@@ -110,6 +111,18 @@ function CyberpunkTemplate({ data }) {
           ))}
         </div>
       </section>
+      {/* Custom Domain */}
+{data.customDomain && (
+  <section className="cyberpunk-section">
+    <h2>&gt; CUSTOM DOMAIN</h2>
+    <p>
+      🌐 {data.customDomain}
+    </p>
+    <p>
+      Status: Ready for DNS Setup ✅
+    </p>
+  </section>
+)}
       {/* Contact */}
 <section className="cyberpunk-section">
   <h2>&gt; CONTACT</h2>
@@ -124,7 +137,7 @@ function CyberpunkTemplate({ data }) {
         const formData = new FormData(e.target);
 
         const response = await fetch(
-  "http://localhost:5000/api/contact",
+  "https://codefolio-backend-chaitanya.onrender.com/api/contact",
   {
     method: "POST",
     headers: {
